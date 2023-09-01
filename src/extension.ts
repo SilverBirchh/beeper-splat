@@ -10,6 +10,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 		if (destination) {
 			const name = await vscode.window.showInputBox({ placeHolder: "Component Name", value: "Beeper" });
+			if (!name) {
+				return;
+			}
 			try {
 				const index = Buffer.from(`export * from './${name}';\n`);
 				const component = Buffer.from(`import React from 'react';\n\nimport style from './${name}.module.scss';\n\ntype Props = {\n\n};\n\nexport const ${name} = (props: Props) => {\n\n};\n`);
