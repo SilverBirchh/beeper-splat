@@ -1,9 +1,39 @@
-import { mkdirSync } from "fs";
 import path = require("path");
 import * as vscode from "vscode";
 
 export function activate(context: vscode.ExtensionContext) {
-  let disposable = vscode.commands.registerCommand(
+  let newFile = vscode.commands.registerCommand(
+    "beeper-splat.newFile",
+    async (location) => {
+      const currentlyOpenTabfilePath =
+        vscode.window.activeTextEditor?.document.uri.path;
+      let dirPath = currentlyOpenTabfilePath
+        ? path.dirname(currentlyOpenTabfilePath)
+        : null;
+      let destination = location?.path || dirPath;
+      const slashIndex = destination.lastIndexOf("/");
+      const dirName = destination.substring(slashIndex + 1);
+      if (destination && dirName) {
+        const name = await vscode.window.showInputBox({
+          placeHolder: "File extension",
+          value: "types.ts",
+        });
+        if (!name) {
+          return;
+        }
+        await vscode.workspace.fs.writeFile(
+          vscode.Uri.parse(`${destination}/${dirName}.${name}`),
+          new Uint8Array()
+        );
+
+        const doc = await vscode.workspace.openTextDocument(
+          vscode.Uri.parse(`${destination}/${dirName}.${name}`)
+        );
+        await vscode.window.showTextDocument(doc);
+      }
+    }
+  );
+  let newComponent = vscode.commands.registerCommand(
     "beeper-splat.newComponent",
     async (location) => {
       const currentlyOpenTabfilePath =
@@ -54,13 +84,13 @@ export function activate(context: vscode.ExtensionContext) {
             vscode.Uri.parse(`${destination}/${name}/${name}.module.scss`)
           );
 
-		  let pos1 = new vscode.Position(0, 0);
-		  let pos2 = new vscode.Position(0, 0);
-		  let sel = new vscode.Selection(pos1, pos2);
+          let pos1 = new vscode.Position(0, 0);
+          let pos2 = new vscode.Position(0, 0);
+          let sel = new vscode.Selection(pos1, pos2);
 
           await vscode.window.showTextDocument(styleDoc);
           const e = await vscode.window.showTextDocument(componentDoc);
-		  e.selection = sel;
+          e.selection = sel;
           vscode.commands.executeCommand("cursorMove", {
             to: "down",
             by: "line",
@@ -74,7 +104,8 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
-  context.subscriptions.push(disposable);
+  context.subscriptions.push(newFile);
+  context.subscriptions.push(newComponent);
 }
 
 export function deactivate() {}

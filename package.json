@@ -20,6 +20,12 @@
           "command": "beeper-splat.newComponent",
           "when": "explorerResourceIsFolder",
           "group": "navigation"
+        },
+        {
+          "command": "beeper-splat.newFile",
+          "when": "explorerResourceIsFolder",
+          "title": "New Beeper File",
+          "group": "navigation"
         }
       ]
     },
@@ -27,6 +33,10 @@
       {
         "command": "beeper-splat.newComponent",
         "title": "New Beeper Component"
+      },
+      {
+        "command": "beeper-splat.newFile",
+        "title": "New Beeper File"
       }
     ]
   },
