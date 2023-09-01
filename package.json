@@ -1,5 +1,6 @@
 {
   "name": "beeper-splat",
+  "repository": "https://github.com/SilverBirchh/beeper-splat",
   "displayName": "beeper-splat",
   "description": "",
   "version": "0.0.1",
@@ -48,8 +49,5 @@
     "glob": "^10.3.3",
     "mocha": "^10.2.0",
     "typescript": "^5.1.6"
-  },
-  "dependencies": {
-    "fs": "^0.0.1-security"
   }
 }
