@@ -1,7 +1,5 @@
-import path = require("path");
 import * as vscode from "vscode";
 import * as semver from "semver";
-import * as git from "simple-git";
 import { GitExtension, Repository } from "./git";
 
 export const bumpBeeperVersion = async () => {
