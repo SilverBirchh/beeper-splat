@@ -31,12 +31,16 @@
     },
     "commands": [
       {
+        "command": "beeper-splat.bumpVersion",
+        "title": "Beeper: Bump Version"
+      },
+      {
         "command": "beeper-splat.newComponent",
-        "title": "New Beeper Component"
+        "title": "Beeper: New Component"
       },
       {
         "command": "beeper-splat.newFile",
-        "title": "New Beeper File"
+        "title": "Beeper: New File"
       }
     ]
   },
@@ -60,5 +64,11 @@
     "glob": "^10.3.3",
     "mocha": "^10.2.0",
     "typescript": "^5.1.6"
-  }
+  },
+  "dependencies": {
+    "semver": "^7.5.4"
+  },
+  "extensionDependencies": [
+    "vscode.git"
+  ]
 }
