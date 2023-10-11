@@ -23,7 +23,7 @@ export const createNewComponent = async (location: any) => {
     try {
       const index = Buffer.from(`export * from './${name}';\n`);
       const component = Buffer.from(
-        `import React from 'react';\n\nimport style from './${name}.module.scss';\n\ninterface MyComponentProps { {\n\n};\n\nexport const ${name} = (props: Props) => {\n\n};\n`
+        `import React from 'react';\n\nimport style from './${name}.module.scss';\n\ninterface MyComponentProps {\n\n}\n\nexport const ${name} = (props: MyComponentProps) => {\n\n};\n`
       );
       const style = Buffer.from(`.container {\n\n}`);
 
